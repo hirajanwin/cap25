@@ -71,7 +71,7 @@ export default function MembersPage() {
             />
             {!isLeftCollapsed && (
               <>
-                <div className="p-4 bg-white border-b border-[#ebeef4]">
+                <div className="px-4 py-2 bg-white border-b border-[#ebeef4]">
                   <SearchInput 
                     placeholder="Search members"
                     value={searchQuery}
