@@ -13,10 +13,10 @@ export default function MembersPage() {
   const [isRightCollapsed, setIsRightCollapsed] = useState(false);
 
   return (
-    <div className="h-[calc(100vh-4rem)]">
+    <div className="h-full px-4 pb-4">
       <ResizablePanelGroup
         direction="horizontal"
-        className="h-full rounded-lg"
+        className="h-full"
       >
         {/* Left Panel */}
         <ResizablePanel
@@ -27,7 +27,7 @@ export default function MembersPage() {
             isLeftCollapsed ? 'min-w-[56px] max-w-[56px]' : 'min-w-[360px] max-w-[360px]'
           }`}
         >
-          <div className="h-full bg-[#f6f6f6] rounded-l-lg">
+          <div className="h-full bg-[#f6f6f6] rounded-2xl">
             <PanelHeader 
               onSidebarClick={() => setIsLeftCollapsed(!isLeftCollapsed)}
             />
@@ -44,8 +44,8 @@ export default function MembersPage() {
           defaultSize={50} 
           className="min-w-[200px]"
         >
-          <div className="h-full bg-[#f6f6f6]">
-            <div className="h-12 px-4 border-b border-[#ebeef4] flex items-center bg-[#f6f6f6]" />
+          <div className="h-full bg-[#f6f6f6] rounded-2xl">
+            <div className="h-12 px-4 border-b border-[#ebeef4] flex items-center bg-[#f6f6f6] rounded-t-2xl" />
             <div className="p-4">Middle Panel Content</div>
           </div>
         </ResizablePanel>
@@ -61,7 +61,7 @@ export default function MembersPage() {
             isRightCollapsed ? 'min-w-[56px] max-w-[56px]' : 'min-w-[360px] max-w-[360px]'
           }`}
         >
-          <div className="h-full bg-[#f6f6f6] rounded-r-lg">
+          <div className="h-full bg-[#f6f6f6] rounded-2xl">
             <PanelHeader 
               onSidebarClick={() => setIsRightCollapsed(!isRightCollapsed)}
             />
