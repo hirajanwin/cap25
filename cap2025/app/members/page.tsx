@@ -11,6 +11,7 @@ import { SearchInput } from "@/components/ui/search-input";
 import { Tabs } from "@/components/ui/tabs";
 import { Tabs as TabsShadcn, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs-shadcn";
 import { FilterIcon } from "@/components/icons/filter-icon";
+import { Chat } from "@/components/ui/chat";
 
 const memberFilters = [
   "All members",
@@ -119,7 +120,10 @@ export default function MembersPage() {
                 onAddClick={() => console.log('Add clicked')}
               />
             </div>
-            <div className="p-4">Middle Panel Content</div>
+            <div className="p-4 h-[calc(100%-8.5rem)]">
+              {selectedTab === 'chat' && <Chat />}
+              {selectedTab !== 'chat' && <div>Middle Panel Content</div>}
+            </div>
           </div>
         </ResizablePanel>
         
