@@ -16,7 +16,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="h-16 px-4 py-3 justify-between items-center flex w-full bg-[#EBEEF4] border-b">
+    <nav className="h-16 px-4 py-3 justify-between items-center flex w-full bg-[#EBEEF4]">
       {/* Logo */}
       <div className="w-10 h-10 rounded-3xl justify-center items-center gap-2.5 flex">
         <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">

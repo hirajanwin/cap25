@@ -1,41 +1,73 @@
 'use client';
 
+import { useState } from "react";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { PanelHeader } from "@/components/panel-header";
 
 export default function MembersPage() {
+  const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
+  const [isRightCollapsed, setIsRightCollapsed] = useState(false);
+
   return (
-    <div className="p-4 pb-4 h-[calc(100vh-4rem)]">
+    <div className="h-[calc(100vh-4rem)]">
       <ResizablePanelGroup
         direction="horizontal"
-        className="h-full gap-4"
+        className="h-full rounded-lg"
       >
+        {/* Left Panel */}
         <ResizablePanel
           defaultSize={25}
-          minSize={20}
-          className="min-w-[360px]"
+          minSize={5}
+          maxSize={30}
+          className={`transition-all duration-300 ease-in-out ${
+            isLeftCollapsed ? 'min-w-[56px] max-w-[56px]' : 'min-w-[360px] max-w-[360px]'
+          }`}
         >
-          <div className="h-full bg-[#f6f6f6] rounded-2xl p-4">
-            Left Panel
+          <div className="h-full bg-[#f6f6f6] rounded-l-lg">
+            <PanelHeader 
+              onSidebarClick={() => setIsLeftCollapsed(!isLeftCollapsed)}
+            />
+            {!isLeftCollapsed && (
+              <div className="p-4">Left Panel Content</div>
+            )}
           </div>
         </ResizablePanel>
-        <ResizableHandle withHandle className="w-4 bg-transparent" />
-        <ResizablePanel defaultSize={50}>
-          <div className="h-full bg-[#f6f6f6] rounded-2xl p-4">
-            Middle Panel
+        
+        <ResizableHandle className="w-4 bg-[#EBEEF4]" />
+        
+        {/* Middle Panel */}
+        <ResizablePanel 
+          defaultSize={50} 
+          className="min-w-[200px]"
+        >
+          <div className="h-full bg-[#f6f6f6]">
+            <div className="h-12 px-4 border-b border-[#ebeef4] flex items-center bg-[#f6f6f6]" />
+            <div className="p-4">Middle Panel Content</div>
           </div>
         </ResizablePanel>
-        <ResizableHandle withHandle className="w-4 bg-transparent" />
+        
+        <ResizableHandle className="w-4 bg-[#EBEEF4]" />
+        
+        {/* Right Panel */}
         <ResizablePanel
           defaultSize={25}
-          minSize={20}
-          className="min-w-[360px]"
+          minSize={5}
+          maxSize={30}
+          className={`transition-all duration-300 ease-in-out ${
+            isRightCollapsed ? 'min-w-[56px] max-w-[56px]' : 'min-w-[360px] max-w-[360px]'
+          }`}
         >
-          <div className="h-full bg-[#f6f6f6] rounded-2xl p-4">
-            Right Panel
+          <div className="h-full bg-[#f6f6f6] rounded-r-lg">
+            <PanelHeader 
+              onSidebarClick={() => setIsRightCollapsed(!isRightCollapsed)}
+            />
+            {!isRightCollapsed && (
+              <div className="p-4">Right Panel Content</div>
+            )}
           </div>
         </ResizablePanel>
       </ResizablePanelGroup>
