@@ -70,14 +70,18 @@ export default function MembersPage() {
               onDropdownSelect={setSelectedMemberFilter}
             />
             {!isLeftCollapsed && (
-              <div className="p-4 bg-white">
-                <SearchInput 
-                  placeholder="Search members"
-                  value={searchQuery}
-                  onChange={setSearchQuery}
-                />
-                <div className="mt-4">Left Panel Content</div>
-              </div>
+              <>
+                <div className="p-4 bg-white border-b border-[#ebeef4]">
+                  <SearchInput 
+                    placeholder="Search members"
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                  />
+                </div>
+                <div className="p-4">
+                  Left Panel Content
+                </div>
+              </>
             )}
           </div>
         </ResizablePanel>
