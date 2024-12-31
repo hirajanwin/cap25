@@ -51,7 +51,7 @@
 
 @layer base {
   * {
-    /* Removed the problematic border-border class */
+    font-family: 'Inter', sans-serif;
   }
   body {
     @apply bg-background text-foreground;

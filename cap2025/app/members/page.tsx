@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/resizable";
 import { PanelHeader } from "@/components/panel-header";
 import { SearchInput } from "@/components/ui/search-input";
+import { Tabs } from "@/components/ui/tabs";
+import { Tabs as TabsShadcn, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs-shadcn";
 
 const memberFilters = [
   "All members",
@@ -38,6 +40,13 @@ const detailFilters = [
   "Program details",
 ];
 
+const tabs = [
+  { id: 'chat', label: 'Chat' },
+  { id: 'sensor', label: 'Sensor' },
+  { id: 'communication', label: 'Communication' },
+  { id: 'care-plan', label: 'Care Plan' },
+];
+
 export default function MembersPage() {
   const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
   const [isRightCollapsed, setIsRightCollapsed] = useState(false);
@@ -45,6 +54,7 @@ export default function MembersPage() {
   const [selectedThreadFilter, setSelectedThreadFilter] = useState(threadFilters[0]);
   const [selectedDetailFilter, setSelectedDetailFilter] = useState(detailFilters[0]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTab, setSelectedTab] = useState('chat');
 
   return (
     <div className="h-full px-4 pb-4">
@@ -100,6 +110,14 @@ export default function MembersPage() {
               selectedItem={selectedThreadFilter}
               onDropdownSelect={setSelectedThreadFilter}
             />
+            <div className="bg-white border-b border-[#ebeef4]">
+              <Tabs 
+                tabs={tabs}
+                selectedTab={selectedTab}
+                onTabChange={setSelectedTab}
+                onAddClick={() => console.log('Add clicked')}
+              />
+            </div>
             <div className="p-4">Middle Panel Content</div>
           </div>
         </ResizablePanel>
@@ -124,7 +142,18 @@ export default function MembersPage() {
               onDropdownSelect={setSelectedDetailFilter}
             />
             {!isRightCollapsed && (
-              <div className="p-4">Right Panel Content</div>
+              <>
+                <div className="p-4">
+                  <TabsShadcn defaultValue="primary">
+                    <TabsList className="w-full">
+                      <TabsTrigger value="primary">Primary</TabsTrigger>
+                      <TabsTrigger value="secondary">Secondary</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="primary">Primary Content</TabsContent>
+                    <TabsContent value="secondary">Secondary Content</TabsContent>
+                  </TabsShadcn>
+                </div>
+              </>
             )}
           </div>
         </ResizablePanel>
