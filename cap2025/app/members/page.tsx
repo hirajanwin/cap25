@@ -8,9 +8,41 @@ import {
 } from "@/components/ui/resizable";
 import { PanelHeader } from "@/components/panel-header";
 
+const memberFilters = [
+  "All members",
+  "D1-D10",
+  "Hotlist",
+  "Achievement",
+  "No Chat",
+  "PTO Coverage",
+];
+
+const threadFilters = [
+  "Relevant threads",
+  "Recent threads",
+  "Adherence threads",
+  "Custom threads",
+  "Nutrition threads",
+  "Treatment threads",
+  "Lab threads",
+];
+
+const detailFilters = [
+  "Relevant details",
+  "Sensor details",
+  "Nutrition details",
+  "Treatment details",
+  "Lab details",
+  "Member details",
+  "Program details",
+];
+
 export default function MembersPage() {
   const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
   const [isRightCollapsed, setIsRightCollapsed] = useState(false);
+  const [selectedMemberFilter, setSelectedMemberFilter] = useState(memberFilters[0]);
+  const [selectedThreadFilter, setSelectedThreadFilter] = useState(threadFilters[0]);
+  const [selectedDetailFilter, setSelectedDetailFilter] = useState(detailFilters[0]);
 
   return (
     <div className="h-full px-4 pb-4">
@@ -30,6 +62,10 @@ export default function MembersPage() {
           <div className="h-full bg-[#f6f6f6] rounded-2xl">
             <PanelHeader 
               onSidebarClick={() => setIsLeftCollapsed(!isLeftCollapsed)}
+              showDropdown={!isLeftCollapsed}
+              dropdownItems={memberFilters}
+              selectedItem={selectedMemberFilter}
+              onDropdownSelect={setSelectedMemberFilter}
             />
             {!isLeftCollapsed && (
               <div className="p-4">Left Panel Content</div>
@@ -45,7 +81,12 @@ export default function MembersPage() {
           className="min-w-[200px]"
         >
           <div className="h-full bg-[#f6f6f6] rounded-2xl">
-            <div className="h-12 px-4 border-b border-[#ebeef4] flex items-center bg-[#f6f6f6] rounded-t-2xl" />
+            <PanelHeader 
+              showDropdown={true}
+              dropdownItems={threadFilters}
+              selectedItem={selectedThreadFilter}
+              onDropdownSelect={setSelectedThreadFilter}
+            />
             <div className="p-4">Middle Panel Content</div>
           </div>
         </ResizablePanel>
@@ -64,6 +105,10 @@ export default function MembersPage() {
           <div className="h-full bg-[#f6f6f6] rounded-2xl">
             <PanelHeader 
               onSidebarClick={() => setIsRightCollapsed(!isRightCollapsed)}
+              showDropdown={!isRightCollapsed}
+              dropdownItems={detailFilters}
+              selectedItem={selectedDetailFilter}
+              onDropdownSelect={setSelectedDetailFilter}
             />
             {!isRightCollapsed && (
               <div className="p-4">Right Panel Content</div>
