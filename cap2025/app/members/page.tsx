@@ -10,6 +10,7 @@ import { PanelHeader } from "@/components/panel-header";
 import { SearchInput } from "@/components/ui/search-input";
 import { Tabs } from "@/components/ui/tabs";
 import { Tabs as TabsShadcn, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs-shadcn";
+import { FilterIcon } from "@/components/icons/filter-icon";
 
 const memberFilters = [
   "All members",
@@ -143,15 +144,23 @@ export default function MembersPage() {
             />
             {!isRightCollapsed && (
               <>
+                <div className="h-14 px-4 py-1 bg-white justify-start items-center gap-4 inline-flex w-full border-b border-[#ebeef4]">
+                  <div className="grow shrink basis-0">
+                    <TabsShadcn defaultValue="primary">
+                      <TabsList>
+                        <TabsTrigger value="primary">Primary</TabsTrigger>
+                        <TabsTrigger value="secondary">Secondary</TabsTrigger>
+                      </TabsList>
+                    </TabsShadcn>
+                  </div>
+                  <div className="w-10 h-10 flex items-center justify-center">
+                    <button className="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-[#f6f6f6] transition-colors">
+                      <FilterIcon />
+                    </button>
+                  </div>
+                </div>
                 <div className="p-4">
-                  <TabsShadcn defaultValue="primary">
-                    <TabsList className="w-full">
-                      <TabsTrigger value="primary">Primary</TabsTrigger>
-                      <TabsTrigger value="secondary">Secondary</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="primary">Primary Content</TabsContent>
-                    <TabsContent value="secondary">Secondary Content</TabsContent>
-                  </TabsShadcn>
+                  <div className="text-sm text-[#151336]">Primary Content</div>
                 </div>
               </>
             )}
