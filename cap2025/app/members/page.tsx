@@ -105,7 +105,7 @@ export default function MembersPage() {
           defaultSize={50} 
           className="min-w-[200px]"
         >
-          <div className="h-full bg-[#f6f6f6] rounded-2xl">
+          <div className="flex flex-col h-full bg-[#f6f6f6] rounded-2xl">
             <PanelHeader 
               showDropdown={true}
               dropdownItems={threadFilters}
@@ -120,9 +120,9 @@ export default function MembersPage() {
                 onAddClick={() => console.log('Add clicked')}
               />
             </div>
-            <div className="p-4 h-[calc(100%-8.5rem)]">
+            <div className="flex-1 min-h-0">
               {selectedTab === 'chat' && <Chat />}
-              {selectedTab !== 'chat' && <div>Middle Panel Content</div>}
+              {selectedTab !== 'chat' && <div className="p-4">Middle Panel Content</div>}
             </div>
           </div>
         </ResizablePanel>
