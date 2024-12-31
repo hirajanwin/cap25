@@ -7,6 +7,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { PanelHeader } from "@/components/panel-header";
+import { SearchInput } from "@/components/ui/search-input";
 
 const memberFilters = [
   "All members",
@@ -43,6 +44,7 @@ export default function MembersPage() {
   const [selectedMemberFilter, setSelectedMemberFilter] = useState(memberFilters[0]);
   const [selectedThreadFilter, setSelectedThreadFilter] = useState(threadFilters[0]);
   const [selectedDetailFilter, setSelectedDetailFilter] = useState(detailFilters[0]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div className="h-full px-4 pb-4">
@@ -68,7 +70,14 @@ export default function MembersPage() {
               onDropdownSelect={setSelectedMemberFilter}
             />
             {!isLeftCollapsed && (
-              <div className="p-4">Left Panel Content</div>
+              <div className="p-4 bg-white">
+                <SearchInput 
+                  placeholder="Search members"
+                  value={searchQuery}
+                  onChange={setSearchQuery}
+                />
+                <div className="mt-4">Left Panel Content</div>
+              </div>
             )}
           </div>
         </ResizablePanel>

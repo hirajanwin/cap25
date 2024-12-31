@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 interface PanelHeaderProps {
   onSidebarClick?: () => void;
@@ -16,6 +17,7 @@ interface PanelHeaderProps {
   dropdownItems?: string[];
   selectedItem?: string;
   onDropdownSelect?: (item: string) => void;
+  className?: string;
 }
 
 export function PanelHeader({ 
@@ -23,10 +25,14 @@ export function PanelHeader({
   showDropdown,
   dropdownItems = [],
   selectedItem = "All members",
-  onDropdownSelect
+  onDropdownSelect,
+  className
 }: PanelHeaderProps) {
   return (
-    <div className="h-12 px-4 border-b border-[#ebeef4] flex justify-between items-center bg-[#f6f6f6] relative z-10 rounded-t-2xl">
+    <div className={cn(
+      "h-12 px-4 border-b border-[#ebeef4] flex items-center justify-between bg-white rounded-t-2xl",
+      className
+    )}>
       {showDropdown && (
         <Select value={selectedItem} onValueChange={onDropdownSelect}>
           <SelectTrigger className="border-0 bg-transparent p-0 shadow-none focus:ring-0 focus:ring-offset-0">
