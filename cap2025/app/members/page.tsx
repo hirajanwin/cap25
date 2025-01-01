@@ -177,7 +177,7 @@ export default function MembersPage() {
                     <TabsContent value="primary" className="h-full">
                       <ScrollArea.Root className="h-full">
                         <ScrollArea.Viewport className="h-full w-full">
-                          <div className="flex flex-col gap-3 p-4">
+                          <div className="flex flex-col gap-3 px-4 pt-0 pb-4">
                             <Snapshot />
                             <Engagement />
                             <Glucose />

@@ -131,7 +131,7 @@ export function Chat() {
       </div>
 
       {/* Input Area - Fixed size */}
-      <div className="flex-shrink-0 pt-2">
+      <div className="flex-shrink-0 pt-2 border-t border-[#ebeef4]">
         {/* Tabs */}
         <div className="px-4 bg-[#f6f6f6] flex items-center gap-2">
           <button
