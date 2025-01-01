@@ -19,6 +19,10 @@ import { Glucose } from "@/components/ui/glucose";
 import { EA1C } from "@/components/ui/ea1c";
 import { Nutrition } from "@/components/ui/nutrition";
 import { CarePlan } from "@/components/ui/care-plan";
+import { MedicationChanges } from "@/components/ui/medication-changes";
+import { PreTwinMedications } from "@/components/ui/pre-twin-medications";
+import { CurrentMedications } from "@/components/ui/current-medications";
+import { Medication } from "@/components/ui/medication";
 
 const memberFilters = [
   "All members",
@@ -196,8 +200,12 @@ export default function MembersPage() {
                     <TabsContent value="secondary" className="h-full">
                       <ScrollArea.Root className="h-full">
                         <ScrollArea.Viewport className="h-full w-full">
-                          <div className="p-4">
+                          <div className="flex flex-col gap-3 px-4 pt-0 pb-4">
                             <CarePlan />
+                            <MedicationChanges />
+                            <PreTwinMedications />
+                            <CurrentMedications />
+                            <Medication />
                           </div>
                         </ScrollArea.Viewport>
                         <ScrollArea.Scrollbar
