@@ -12,7 +12,8 @@ import { Tabs } from "@/components/ui/tabs";
 import { Tabs as TabsShadcn, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs-shadcn";
 import { FilterIcon } from "@/components/icons/filter-icon";
 import { Chat } from "@/components/ui/chat";
-import { Snapshot } from "@/components/ui/snapshot"; // Added import statement
+import { Snapshot } from "@/components/ui/snapshot";
+import { Engagement } from "@/components/ui/engagement";
 
 const memberFilters = [
   "All members",
@@ -165,8 +166,9 @@ export default function MembersPage() {
                     </button>
                   </div>
                 </div>
-                <div className="p-4 overflow-y-auto">
+                <div className="flex flex-col gap-3 p-4 overflow-y-auto">
                   <Snapshot />
+                  <Engagement />
                 </div>
               </>
             )}
