@@ -14,6 +14,10 @@ import { FilterIcon } from "@/components/icons/filter-icon";
 import { Chat } from "@/components/ui/chat";
 import { Snapshot } from "@/components/ui/snapshot";
 import { Engagement } from "@/components/ui/engagement";
+import { Glucose } from "@/components/ui/glucose";
+import { EA1C } from "@/components/ui/ea1c";
+import { Nutrition } from "@/components/ui/nutrition";
+import { CarePlan } from "@/components/ui/care-plan";
 
 const memberFilters = [
   "All members",
@@ -150,27 +154,43 @@ export default function MembersPage() {
               onDropdownSelect={setSelectedDetailFilter}
             />
             {!isRightCollapsed && (
-              <>
-                <div className="h-14 px-4 py-1 bg-white justify-start items-center gap-4 inline-flex w-full border-b border-[#ebeef4]">
-                  <div className="grow shrink basis-0">
-                    <TabsShadcn defaultValue="primary">
+              <div className="flex flex-col h-full overflow-hidden">
+                <TabsShadcn defaultValue="primary" className="w-full h-full">
+                  <div className="h-14 px-4 py-1 bg-white justify-start items-center gap-4 inline-flex w-full border-b border-[#ebeef4]">
+                    <div className="grow shrink basis-0">
                       <TabsList>
                         <TabsTrigger value="primary">Primary</TabsTrigger>
                         <TabsTrigger value="secondary">Secondary</TabsTrigger>
                       </TabsList>
-                    </TabsShadcn>
+                    </div>
+                    <div className="w-10 h-10 flex items-center justify-center">
+                      <button className="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-[#f6f6f6] transition-colors">
+                        <FilterIcon />
+                      </button>
+                    </div>
                   </div>
-                  <div className="w-10 h-10 flex items-center justify-center">
-                    <button className="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-[#f6f6f6] transition-colors">
-                      <FilterIcon />
-                    </button>
+                  <div className="flex-1 overflow-hidden">
+                    <TabsContent value="primary" className="m-0 h-full">
+                      <div className="h-full overflow-y-auto">
+                        <div className="flex flex-col gap-3 p-4">
+                          <Snapshot />
+                          <Engagement />
+                          <Glucose />
+                          <EA1C />
+                          <Nutrition />
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent value="secondary" className="m-0 h-full">
+                      <div className="h-full overflow-y-auto">
+                        <div className="p-4">
+                          <CarePlan />
+                        </div>
+                      </div>
+                    </TabsContent>
                   </div>
-                </div>
-                <div className="flex flex-col gap-3 p-4 overflow-y-auto">
-                  <Snapshot />
-                  <Engagement />
-                </div>
-              </>
+                </TabsShadcn>
+              </div>
             )}
           </div>
         </ResizablePanel>
