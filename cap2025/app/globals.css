@@ -10,9 +10,9 @@
 }
 
 @font-face {
-  font-family: 'Söhne Mono';
-  src: url('/SöhneMono-Kräftig.otf') format('opentype');
-  font-weight: 500;
+  font-family: 'SöhneMono';
+  src: url('/SöhneMono.otf') format('opentype');
+  font-weight: normal;
   font-style: normal;
 }
 

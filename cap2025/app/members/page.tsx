@@ -12,6 +12,7 @@ import { Tabs } from "@/components/ui/tabs";
 import { Tabs as TabsShadcn, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs-shadcn";
 import { FilterIcon } from "@/components/icons/filter-icon";
 import { Chat } from "@/components/ui/chat";
+import { Snapshot } from "@/components/ui/snapshot"; // Added import statement
 
 const memberFilters = [
   "All members",
@@ -131,15 +132,15 @@ export default function MembersPage() {
         <ResizableHandle className="w-4 bg-[#EBEEF4]" />
         
         {/* Right Panel */}
-        <ResizablePanel
-          defaultSize={25}
+        <ResizablePanel 
+          defaultSize={25} 
           minSize={5}
           maxSize={30}
           className={`transition-all duration-300 ease-in-out ${
             isRightCollapsed ? 'min-w-[56px] max-w-[56px]' : 'min-w-[360px] max-w-[360px]'
           }`}
         >
-          <div className="h-full bg-[#f6f6f6] rounded-2xl">
+          <div className="flex flex-col h-full bg-[#f6f6f6] rounded-2xl">
             <PanelHeader 
               onSidebarClick={() => setIsRightCollapsed(!isRightCollapsed)}
               showDropdown={!isRightCollapsed}
@@ -164,8 +165,8 @@ export default function MembersPage() {
                     </button>
                   </div>
                 </div>
-                <div className="p-4">
-                  <div className="text-sm text-[#151336]">Primary Content</div>
+                <div className="p-4 overflow-y-auto">
+                  <Snapshot />
                 </div>
               </>
             )}
