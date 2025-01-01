@@ -48,14 +48,16 @@ export function PanelHeader({
         </Select>
       )}
       {!showDropdown && <div />}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="w-5 h-5 p-0 hover:bg-transparent"
-        onClick={onSidebarClick}
-      >
-        <SidebarIcon className="h-5 w-5 text-[#555a83]" />
-      </Button>
+      {onSidebarClick && (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="w-5 h-5 p-0 hover:bg-transparent"
+          onClick={onSidebarClick}
+        >
+          <SidebarIcon className="h-5 w-5 text-[#555a83]" />
+        </Button>
+      )}
     </div>
   );
 }

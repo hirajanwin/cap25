@@ -108,12 +108,12 @@ export function Chat() {
                   }`}
                 >
                   <div
-                    className={`max-w-[80%] font-['Söhne_Buch'] text-base leading-[21px] font-normal ${
+                    className={`max-w-[80%] font-['Söhne'] text-base leading-[21px] font-normal ${
                       message.role === 'assistant'
                         ? 'bg-white text-[#101828] p-[8px_16px] rounded-[0px_8px_8px_8px] flex items-center gap-2'
                         : 'bg-[rgba(204,222,254,0.4)] text-[#101828] p-[10px_14px] rounded-[8px_8px_0px_8px] flex items-center gap-2'
                     }`}
-                    style={{ fontFamily: 'Söhne Buch' }}
+                    style={{ fontFamily: 'Söhne' }}
                   >
                     {message.content}
                   </div>
@@ -131,7 +131,7 @@ export function Chat() {
       </div>
 
       {/* Input Area - Fixed size */}
-      <div className="flex-shrink-0">
+      <div className="flex-shrink-0 pt-2">
         {/* Tabs */}
         <div className="px-4 bg-[#f6f6f6] flex items-center gap-2">
           <button
@@ -158,7 +158,7 @@ export function Chat() {
 
         {/* Chat Input Container */}
         <div className="p-4 pt-2 bg-[#f6f6f6] rounded-bl-2xl rounded-br-2xl">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
             {/* Text Area */}
             <div className="bg-white rounded-2xl border border-[#206bdb] p-4">
               <textarea
@@ -197,7 +197,7 @@ export function Chat() {
                     <button
                       key={chip}
                       onClick={() => toggleChip(chip)}
-                      className={`flex flex-row items-center h-5 px-2 py-0.5 rounded-2xl gap-0.5 ${
+                      className={`flex flex-row items-center h-6 px-2 py-2 rounded-2xl gap-0.5 ${
                         selectedChips.includes(chip)
                           ? 'bg-[#CCDEFE]'
                           : 'bg-[#ebeef4] border border-[#ccdefe]'
@@ -209,9 +209,9 @@ export function Chat() {
                       {selectedChips.includes(chip) ? (
                         <CheckIcon className="w-4 h-4" />
                       ) : (
-                        <div className="w-4 h-4 relative">
+                        
                           <PlusIcon className="w-4 h-4" />
-                        </div>
+                        
                       )}
                     </button>
                   ))}

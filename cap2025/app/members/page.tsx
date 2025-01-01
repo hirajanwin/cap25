@@ -111,6 +111,7 @@ export default function MembersPage() {
               dropdownItems={threadFilters}
               selectedItem={selectedThreadFilter}
               onDropdownSelect={setSelectedThreadFilter}
+              onSidebarClick={undefined}
             />
             <div className="bg-white border-b border-[#ebeef4]">
               <Tabs 
