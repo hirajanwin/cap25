@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import * as ScrollArea from '@radix-ui/react-scroll-area';
 import {
   ResizableHandle,
   ResizablePanel,
@@ -86,6 +87,7 @@ export default function MembersPage() {
               dropdownItems={memberFilters}
               selectedItem={selectedMemberFilter}
               onDropdownSelect={setSelectedMemberFilter}
+              className="flex-none"
             />
             {!isLeftCollapsed && (
               <>
@@ -118,6 +120,7 @@ export default function MembersPage() {
               selectedItem={selectedThreadFilter}
               onDropdownSelect={setSelectedThreadFilter}
               onSidebarClick={undefined}
+              className="flex-none"
             />
             <div className="bg-white border-b border-[#ebeef4]">
               <Tabs 
@@ -152,11 +155,12 @@ export default function MembersPage() {
               dropdownItems={detailFilters}
               selectedItem={selectedDetailFilter}
               onDropdownSelect={setSelectedDetailFilter}
+              className="flex-none"
             />
             {!isRightCollapsed && (
-              <div className="flex flex-col h-full overflow-hidden">
-                <TabsShadcn defaultValue="primary" className="w-full h-full">
-                  <div className="h-14 px-4 py-1 bg-white justify-start items-center gap-4 inline-flex w-full border-b border-[#ebeef4]">
+              <div className="flex flex-col flex-1 min-h-0">
+                <TabsShadcn defaultValue="primary" className="h-full flex flex-col">
+                  <div className="h-14 flex-none px-4 py-1 bg-white justify-start items-center gap-4 inline-flex w-full border-b border-[#ebeef4]">
                     <div className="grow shrink basis-0">
                       <TabsList>
                         <TabsTrigger value="primary">Primary</TabsTrigger>
@@ -169,24 +173,40 @@ export default function MembersPage() {
                       </button>
                     </div>
                   </div>
-                  <div className="flex-1 overflow-hidden">
-                    <TabsContent value="primary" className="m-0 h-full">
-                      <div className="h-full overflow-y-auto">
-                        <div className="flex flex-col gap-3 p-4">
-                          <Snapshot />
-                          <Engagement />
-                          <Glucose />
-                          <EA1C />
-                          <Nutrition />
-                        </div>
-                      </div>
+                  <div className="flex-1 min-h-0">
+                    <TabsContent value="primary" className="h-full">
+                      <ScrollArea.Root className="h-full">
+                        <ScrollArea.Viewport className="h-full w-full">
+                          <div className="flex flex-col gap-3 p-4">
+                            <Snapshot />
+                            <Engagement />
+                            <Glucose />
+                            <EA1C />
+                            <Nutrition />
+                          </div>
+                        </ScrollArea.Viewport>
+                        <ScrollArea.Scrollbar
+                          className="flex select-none touch-none p-0.5 bg-transparent transition-colors duration-[160ms] ease-out hover:bg-transparent data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                          orientation="vertical"
+                        >
+                          <ScrollArea.Thumb className="flex-1 bg-gray-300 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px] hover:bg-gray-400" />
+                        </ScrollArea.Scrollbar>
+                      </ScrollArea.Root>
                     </TabsContent>
-                    <TabsContent value="secondary" className="m-0 h-full">
-                      <div className="h-full overflow-y-auto">
-                        <div className="p-4">
-                          <CarePlan />
-                        </div>
-                      </div>
+                    <TabsContent value="secondary" className="h-full">
+                      <ScrollArea.Root className="h-full">
+                        <ScrollArea.Viewport className="h-full w-full">
+                          <div className="p-4">
+                            <CarePlan />
+                          </div>
+                        </ScrollArea.Viewport>
+                        <ScrollArea.Scrollbar
+                          className="flex select-none touch-none p-0.5 bg-transparent transition-colors duration-[160ms] ease-out hover:bg-transparent data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                          orientation="vertical"
+                        >
+                          <ScrollArea.Thumb className="flex-1 bg-gray-300 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px] hover:bg-gray-400" />
+                        </ScrollArea.Scrollbar>
+                      </ScrollArea.Root>
                     </TabsContent>
                   </div>
                 </TabsShadcn>
