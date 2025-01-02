@@ -218,7 +218,7 @@ export default function MembersPage() {
                   <TabsContent value="primary" className="h-full">
                     <ScrollArea.Root className="h-full">
                       <ScrollArea.Viewport className="h-full w-full">
-                        <div className="flex flex-col gap-3 px-4 pt-4 pb-4">
+                        <div className="flex flex-col gap-3 px-4 pb-4">
                           <Snapshot />
                           <Engagement />
                           <Glucose />
@@ -237,7 +237,7 @@ export default function MembersPage() {
                   <TabsContent value="secondary" className="h-full">
                     <ScrollArea.Root className="h-full">
                       <ScrollArea.Viewport className="h-full w-full">
-                        <div className="flex flex-col gap-3 px-4 pt-4 pb-4">
+                        <div className="flex flex-col gap-3 px-4 pb-4">
                           <CarePlan data={selectedMember.primaryData.carePlan} />
                           <MedicationChanges data={selectedMember.primaryData.medicationChanges} />
                           <PreTwinMedications data={selectedMember.secondaryData.preTwinMedications} />
