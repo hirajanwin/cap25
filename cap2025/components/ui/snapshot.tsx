@@ -52,7 +52,7 @@ function MetricBox({
 }
 
 export function Snapshot({
-  name = "Jane Doe",
+  name = "John Doe",
   id = "#1111111",
   age = "33y",
   gender = "M",

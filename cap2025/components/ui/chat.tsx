@@ -8,61 +8,61 @@ import * as ScrollArea from '@radix-ui/react-scroll-area'
 const sampleMessages = [
   {
     id: 1,
-    role: 'assistant',
+    role: 'user',
     content: "Welcome back! I noticed you've been consistently meeting your step goals this week. Great work! ",
     timestamp: '2024-12-31T14:30:00Z'
   },
   {
     id: 2,
-    role: 'user',
+    role: 'assistant',
     content: "Thanks! Yes, I've been trying to take more walks during my breaks.",
     timestamp: '2024-12-31T14:31:00Z'
   },
   {
     id: 3,
-    role: 'assistant',
+    role: 'user',
     content: "That's a great habit! I also see your blood glucose levels have been more stable during these walking days.",
     timestamp: '2024-12-31T14:32:00Z'
   },
   {
     id: 4,
-    role: 'user',
+    role: 'assistant',
     content: "Really? I hadn't noticed that connection.",
     timestamp: '2024-12-31T14:33:00Z'
   },
   {
     id: 5,
-    role: 'assistant',
+    role: 'user',
     content: "Yes! On days with 30+ minute walks, your post-meal glucose spikes are about 15% lower on average.",
     timestamp: '2024-12-31T14:34:00Z'
   },
   {
     id: 6,
-    role: 'user',
+    role: 'assistant',
     content: "That's really interesting! I'll try to keep this up.",
     timestamp: '2024-12-31T14:35:00Z'
   },
   {
     id: 7,
-    role: 'assistant',
+    role: 'user',
     content: "Would you like me to set a reminder for your daily walks? I can help you maintain this momentum.",
     timestamp: '2024-12-31T14:36:00Z'
   },
   {
     id: 8,
-    role: 'user',
+    role: 'assistant',
     content: "Yes, please! Maybe around 2 PM each day?",
     timestamp: '2024-12-31T14:37:00Z'
   },
   {
     id: 9,
-    role: 'assistant',
+    role: 'user',
     content: "Perfect! I've set a daily reminder for 2 PM. I'll also share a weekly summary of your walking impact on glucose levels.",
     timestamp: '2024-12-31T14:38:00Z'
   },
   {
     id: 10,
-    role: 'user',
+    role: 'assistant',
     content: "That would be very helpful, thank you!",
     timestamp: '2024-12-31T14:39:00Z'
   }
