@@ -3,6 +3,7 @@
 import * as React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { CheckIcon, MoreHorizontalIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface TaskCardProps {
   memberName: string;
@@ -14,6 +15,7 @@ interface TaskCardProps {
   onReject?: () => void;
   onSkip?: () => void;
   onReassign?: () => void;
+  defaultSelected?: boolean;
 }
 
 export function TaskCard({
@@ -26,11 +28,34 @@ export function TaskCard({
   onReject,
   onSkip,
   onReassign,
+  defaultSelected = false,
 }: TaskCardProps) {
+  const [isSelected, setIsSelected] = React.useState(defaultSelected);
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't toggle if clicking on interactive elements
+    if (
+      (e.target as HTMLElement).closest('button') ||
+      (e.target as HTMLElement).closest('[role="menuitem"]')
+    ) {
+      return;
+    }
+    setIsSelected(!isSelected);
+  };
+
   return (
-    <div className="h-fit p-4 bg-white rounded-2xl flex-col justify-start items-start gap-2 inline-flex w-full">
+    <div 
+      className={cn(
+        "h-fit p-4 rounded-2xl flex-col justify-start items-start gap-2 inline-flex w-full cursor-pointer",
+        isSelected ? "bg-[#ccdefe]" : "bg-white"
+      )}
+      onClick={handleCardClick}
+    >
       <div className="flex items-baseline justify-between w-full">
-        <div className="text-[#555a83] text-base font-semibold font-inter leading-tight">
+        <div className={cn(
+          "text-base font-semibold font-inter leading-tight",
+          isSelected ? "text-[#151336]" : "text-[#555a83]"
+        )}>
           {memberName}
         </div>
         <div className="text-[#475466] text-xs font-medium font-['SöhneMono'] leading-tight">
@@ -38,7 +63,10 @@ export function TaskCard({
         </div>
       </div>
 
-      <div className="self-stretch px-4 py-2 bg-[#f6f6f6] rounded-2xl flex-col justify-start items-start gap-2 flex">
+      <div className={cn(
+        "self-stretch px-4 py-2 rounded-2xl flex-col justify-start items-start gap-2 flex",
+        isSelected ? "bg-white" : "bg-[#f6f6f6]"
+      )}>
         <div className="self-stretch justify-start items-center inline-flex">
           <div className="grow shrink basis-0 text-[#151336] text-base font-normal font-['Söhne'] leading-tight">
             {title}
@@ -61,18 +89,27 @@ export function TaskCard({
             onClick={onMarkComplete}
             className="px-0.5 justify-center items-center gap-1 flex hover:opacity-80 transition-opacity"
           >
-            <div className="text-[#555a83] text-sm font-semibold font-inter leading-tight">
+            <div className={cn(
+              "text-sm font-semibold font-inter leading-tight",
+              isSelected ? "text-[#206bdb]" : "text-[#555a83]"
+            )}>
               Mark complete
             </div>
             <div className="w-4 h-4 px-0.5 py-1 justify-center items-center flex overflow-hidden">
-              <CheckIcon className="stroke-[#555a83]" size={16} />
+              <CheckIcon className={cn(
+                "stroke-2",
+                isSelected ? "stroke-[#206bdb]" : "stroke-[#555a83]"
+              )} size={16} />
             </div>
           </button>
 
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
               <button className="justify-center items-center gap-2 flex overflow-hidden hover:opacity-80 transition-opacity">
-                <MoreHorizontalIcon className="w-6 h-6 text-[#555a83]" />
+                <MoreHorizontalIcon className={cn(
+                  "w-6 h-6",
+                  isSelected ? "text-[#206bdb]" : "text-[#555a83]"
+                )} />
               </button>
             </DropdownMenu.Trigger>
 
