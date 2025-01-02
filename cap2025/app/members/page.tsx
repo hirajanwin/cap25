@@ -95,31 +95,53 @@ export default function MembersPage() {
               className="flex-none"
             />
             {!isLeftCollapsed && (
-              <>
-                <div className="px-4 py-2 bg-white border-b border-[#ebeef4]">
-                  <SearchInput 
-                    placeholder="Search members"
-                    value={searchQuery}
-                    onChange={setSearchQuery}
-                  />
+              <div className="h-full border-r border-[#ebeef4] bg-[#f6f6f6]">
+                <div className="flex flex-col h-full">
+                  <div className="p-4 bg-white border-b border-[#ebeef4]">
+                    <SearchInput 
+                      placeholder="Search members"
+                      value={searchQuery}
+                      onChange={setSearchQuery}
+                    />
+                  </div>
+                  <ScrollArea.Root className="h-[calc(100%-80px)]">
+                    <ScrollArea.Viewport className="h-full w-full">
+                      <div className="flex flex-col gap-3 px-4 pb-4">
+                        {[...Array(10)].map((_, index) => (
+                          <TaskCard
+                            key={index}
+                            memberName={index % 2 === 0 ? "John Doe" : "Jane Doe"}
+                            memberId={`#${(22222222 + index).toString()}`}
+                            title={index % 2 === 0 ? "Achievement" : "Hotlist"}
+                            timeAgo="2 hrs ago"
+                            description={
+                              index % 2 === 0
+                                ? [
+                                    "7 days 80% GFY",
+                                    "8 days of 90% food logging"
+                                  ]
+                                : [
+                                    "No sensor data for 5 days",
+                                    "CGM not replaced"
+                                  ]
+                            }
+                            onMarkComplete={() => console.log('Mark complete')}
+                            onReject={() => console.log('Reject')}
+                            onSkip={() => console.log('Skip')}
+                            onReassign={() => console.log('Reassign')}
+                          />
+                        ))}
+                      </div>
+                    </ScrollArea.Viewport>
+                    <ScrollArea.Scrollbar
+                      className="flex select-none touch-none p-0.5 bg-[#f6f6f6] transition-colors duration-[160ms] ease-out hover:bg-[#f6f6f6] data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                      orientation="vertical"
+                    >
+                      <ScrollArea.Thumb className="flex-1 bg-[#d9d9d9] rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+                    </ScrollArea.Scrollbar>
+                  </ScrollArea.Root>
                 </div>
-                <div className="p-4 space-y-4">
-                  <TaskCard
-                    memberName="John Doe"
-                    memberId="#22222222"
-                    title="Achievement"
-                    timeAgo="2 hrs ago"
-                    description={[
-                      "7 days 80% GFY",
-                      "8 days of 90% food logging"
-                    ]}
-                    onMarkComplete={() => console.log('Mark complete')}
-                    onReject={() => console.log('Reject')}
-                    onSkip={() => console.log('Skip')}
-                    onReassign={() => console.log('Reassign')}
-                  />
-                </div>
-              </>
+              </div>
             )}
           </div>
         </ResizablePanel>
