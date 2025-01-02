@@ -23,6 +23,7 @@ import { MedicationChanges } from "@/components/ui/medication-changes";
 import { PreTwinMedications } from "@/components/ui/pre-twin-medications";
 import { CurrentMedications } from "@/components/ui/current-medications";
 import { Medication } from "@/components/ui/medication";
+import { TaskCard } from "@/components/ui/task-card";
 
 const memberFilters = [
   "All members",
@@ -102,8 +103,21 @@ export default function MembersPage() {
                     onChange={setSearchQuery}
                   />
                 </div>
-                <div className="p-4">
-                  Left Panel Content
+                <div className="p-4 space-y-4">
+                  <TaskCard
+                    memberName="John Doe"
+                    memberId="#22222222"
+                    title="Achievement"
+                    timeAgo="2 hrs ago"
+                    description={[
+                      "7 days 80% GFY",
+                      "8 days of 90% food logging"
+                    ]}
+                    onMarkComplete={() => console.log('Mark complete')}
+                    onReject={() => console.log('Reject')}
+                    onSkip={() => console.log('Skip')}
+                    onReassign={() => console.log('Reassign')}
+                  />
                 </div>
               </>
             )}
