@@ -71,7 +71,7 @@ export default function MembersPage() {
   const [selectedTab, setSelectedTab] = useState('chat');
 
   return (
-    <div className="h-full px-4 pb-4">
+    <div className="h-full w-full overflow-hidden rounded-b-2xl px-4 pb-4">
       <ResizablePanelGroup
         direction="horizontal"
         className="h-full"
@@ -81,11 +81,11 @@ export default function MembersPage() {
           defaultSize={25}
           minSize={5}
           maxSize={30}
-          className={`transition-all duration-300 ease-in-out ${
+          className={`transition-all duration-300 ease-in-out rounded-b-2xl ${
             isLeftCollapsed ? 'min-w-[56px] max-w-[56px]' : 'min-w-[360px] max-w-[360px]'
           }`}
         >
-          <div className="h-full bg-[#f6f6f6] rounded-2xl">
+          <div className="h-full w-full overflow-hidden rounded-b-2xl bg-[#f6f6f6]">
             <PanelHeader 
               onSidebarClick={() => setIsLeftCollapsed(!isLeftCollapsed)}
               showDropdown={!isLeftCollapsed}
@@ -95,7 +95,7 @@ export default function MembersPage() {
               className="flex-none"
             />
             {!isLeftCollapsed && (
-              <div className="h-full border-r border-[#ebeef4] bg-[#f6f6f6]">
+              <div className="h-full border-r border-[#ebeef4] bg-[#f6f6f6] rounded-b-2xl">
                 <div className="flex flex-col h-full">
                   <div className="p-4 bg-white border-b border-[#ebeef4]">
                     <SearchInput 
@@ -184,7 +184,7 @@ export default function MembersPage() {
           defaultSize={25} 
           minSize={5}
           maxSize={30}
-          className={`transition-all duration-300 ease-in-out ${
+          className={`transition-all duration-300 ease-in-out rounded-b-2xl ${
             isRightCollapsed ? 'min-w-[56px] max-w-[56px]' : 'min-w-[360px] max-w-[360px]'
           }`}
         >
