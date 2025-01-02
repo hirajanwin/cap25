@@ -16,6 +16,7 @@ interface TaskCardProps {
   onSkip?: () => void;
   onReassign?: () => void;
   defaultSelected?: boolean;
+  onClick?: () => void;
 }
 
 export function TaskCard({
@@ -29,32 +30,31 @@ export function TaskCard({
   onSkip,
   onReassign,
   defaultSelected = false,
+  onClick,
 }: TaskCardProps) {
-  const [isSelected, setIsSelected] = React.useState(defaultSelected);
-
   const handleCardClick = (e: React.MouseEvent) => {
-    // Don't toggle if clicking on interactive elements
+    // Don't trigger click if clicking on interactive elements
     if (
       (e.target as HTMLElement).closest('button') ||
       (e.target as HTMLElement).closest('[role="menuitem"]')
     ) {
       return;
     }
-    setIsSelected(!isSelected);
+    onClick?.();
   };
 
   return (
     <div 
       className={cn(
         "h-fit p-4 rounded-2xl flex-col justify-start items-start gap-2 inline-flex w-full cursor-pointer",
-        isSelected ? "bg-[#ccdefe]" : "bg-white"
+        defaultSelected ? "bg-[#ccdefe]" : "bg-white"
       )}
       onClick={handleCardClick}
     >
       <div className="flex items-baseline justify-between w-full">
         <div className={cn(
           "text-base font-semibold font-inter leading-tight",
-          isSelected ? "text-[#151336]" : "text-[#555a83]"
+          defaultSelected ? "text-[#151336]" : "text-[#555a83]"
         )}>
           {memberName}
         </div>
@@ -65,7 +65,7 @@ export function TaskCard({
 
       <div className={cn(
         "self-stretch px-4 py-2 rounded-2xl flex-col justify-start items-start gap-2 flex",
-        isSelected ? "bg-white" : "bg-[#f6f6f6]"
+        defaultSelected ? "bg-white" : "bg-[#f6f6f6]"
       )}>
         <div className="self-stretch justify-start items-center inline-flex">
           <div className="grow shrink basis-0 text-[#151336] text-base font-normal font-['Söhne'] leading-tight">
@@ -91,14 +91,14 @@ export function TaskCard({
           >
             <div className={cn(
               "text-sm font-semibold font-inter leading-tight",
-              isSelected ? "text-[#206bdb]" : "text-[#555a83]"
+              defaultSelected ? "text-[#206bdb]" : "text-[#555a83]"
             )}>
               Mark complete
             </div>
             <div className="w-4 h-4 px-0.5 py-1 justify-center items-center flex overflow-hidden">
               <CheckIcon className={cn(
                 "stroke-2",
-                isSelected ? "stroke-[#206bdb]" : "stroke-[#555a83]"
+                defaultSelected ? "stroke-[#206bdb]" : "stroke-[#555a83]"
               )} size={16} />
             </div>
           </button>
@@ -108,7 +108,7 @@ export function TaskCard({
               <button className="justify-center items-center gap-2 flex overflow-hidden hover:opacity-80 transition-opacity">
                 <MoreHorizontalIcon className={cn(
                   "w-6 h-6",
-                  isSelected ? "text-[#206bdb]" : "text-[#555a83]"
+                  defaultSelected ? "text-[#206bdb]" : "text-[#555a83]"
                 )} />
               </button>
             </DropdownMenu.Trigger>

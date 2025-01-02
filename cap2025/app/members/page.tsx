@@ -24,6 +24,7 @@ import { PreTwinMedications } from "@/components/ui/pre-twin-medications";
 import { CurrentMedications } from "@/components/ui/current-medications";
 import { Medication } from "@/components/ui/medication";
 import { TaskCard } from "@/components/ui/task-card";
+import { membersData, type Member } from '@/data/members';
 
 const memberFilters = [
   "All members",
@@ -64,11 +65,18 @@ const tabs = [
 export default function MembersPage() {
   const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
   const [isRightCollapsed, setIsRightCollapsed] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTab, setSelectedTab] = useState('chat');
+  const [selectedMember, setSelectedMember] = useState<Member>(membersData[0]);
   const [selectedMemberFilter, setSelectedMemberFilter] = useState(memberFilters[0]);
   const [selectedThreadFilter, setSelectedThreadFilter] = useState(threadFilters[0]);
   const [selectedDetailFilter, setSelectedDetailFilter] = useState(detailFilters[0]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTab, setSelectedTab] = useState('chat');
+
+  // Filter members based on search query
+  const filteredMembers = membersData.filter(member =>
+    member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    member.id.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="h-full w-full overflow-hidden rounded-b-2xl px-4 pb-4">
@@ -85,7 +93,7 @@ export default function MembersPage() {
             isLeftCollapsed ? 'min-w-[56px] max-w-[56px]' : 'min-w-[360px] max-w-[360px]'
           }`}
         >
-          <div className="h-full w-full overflow-hidden rounded-b-2xl bg-[#f6f6f6]">
+          <div className="h-full w-full overflow-hidden rounded-b-2xl bg-[#f6f6f6] rounded-t-2xl">
             <PanelHeader 
               onSidebarClick={() => setIsLeftCollapsed(!isLeftCollapsed)}
               showDropdown={!isLeftCollapsed}
@@ -107,28 +115,20 @@ export default function MembersPage() {
                   <ScrollArea.Root className="h-[calc(100%-80px)]">
                     <ScrollArea.Viewport className="h-full w-full">
                       <div className="flex flex-col gap-3 px-4 pt-4 pb-4">
-                        {[...Array(10)].map((_, index) => (
+                        {filteredMembers.map((member) => (
                           <TaskCard
-                            key={index}
-                            memberName={index % 2 === 0 ? "John Doe" : "Jane Doe"}
-                            memberId={`#${(22222222 + index).toString()}`}
-                            title={index % 2 === 0 ? "Achievement" : "Hotlist"}
-                            timeAgo="2 hrs ago"
-                            description={
-                              index % 2 === 0
-                                ? [
-                                    "7 days 80% GFY",
-                                    "8 days of 90% food logging"
-                                  ]
-                                : [
-                                    "No sensor data for 5 days",
-                                    "CGM not replaced"
-                                  ]
-                            }
-                            onMarkComplete={() => console.log('Mark complete')}
-                            onReject={() => console.log('Reject')}
-                            onSkip={() => console.log('Skip')}
-                            onReassign={() => console.log('Reassign')}
+                            key={member.id}
+                            memberName={member.name}
+                            memberId={member.id}
+                            title={member.task.title}
+                            timeAgo={member.task.timeAgo}
+                            description={member.task.description}
+                            defaultSelected={member.id === selectedMember.id}
+                            onMarkComplete={() => console.log('Mark complete', member.id)}
+                            onReject={() => console.log('Reject', member.id)}
+                            onSkip={() => console.log('Skip', member.id)}
+                            onReassign={() => console.log('Reassign', member.id)}
+                            onClick={() => setSelectedMember(member)}
                           />
                         ))}
                       </div>
@@ -171,8 +171,10 @@ export default function MembersPage() {
               />
             </div>
             <div className="flex-1 min-h-0">
-              {selectedTab === 'chat' && <Chat />}
-              {selectedTab !== 'chat' && <div className="p-4">Middle Panel Content</div>}
+              {selectedTab === 'chat' && <Chat messages={selectedMember.chat.messages} />}
+              {selectedTab === 'sensor' && <Snapshot />}
+              {selectedTab === 'communication' && <Engagement />}
+              {selectedTab === 'care-plan' && <CarePlan data={selectedMember.primaryData.carePlan} />}
             </div>
           </div>
         </ResizablePanel>
@@ -198,63 +200,61 @@ export default function MembersPage() {
               className="flex-none"
             />
             {!isRightCollapsed && (
-              <div className="flex flex-col flex-1 min-h-0">
-                <TabsShadcn defaultValue="primary" className="h-full flex flex-col">
-                  <div className="h-14 flex-none px-4 py-1 bg-white justify-start items-center gap-4 inline-flex w-full border-b border-[#ebeef4]">
-                    <div className="grow shrink basis-0">
-                      <TabsList>
-                        <TabsTrigger value="primary">Primary</TabsTrigger>
-                        <TabsTrigger value="secondary">Secondary</TabsTrigger>
-                      </TabsList>
-                    </div>
-                    <div className="w-10 h-10 flex items-center justify-center">
-                      <button className="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-[#f6f6f6] transition-colors">
-                        <FilterIcon />
-                      </button>
-                    </div>
+              <TabsShadcn defaultValue="primary" className="h-full flex flex-col">
+                <div className="h-14 flex-none px-4 py-1 bg-white justify-start items-center gap-4 inline-flex w-full border-b border-[#ebeef4]">
+                  <div className="grow shrink basis-0">
+                    <TabsList>
+                      <TabsTrigger value="primary">Primary</TabsTrigger>
+                      <TabsTrigger value="secondary">Secondary</TabsTrigger>
+                    </TabsList>
                   </div>
-                  <div className="flex-1 min-h-0">
-                    <TabsContent value="primary" className="h-full">
-                      <ScrollArea.Root className="h-full">
-                        <ScrollArea.Viewport className="h-full w-full">
-                          <div className="flex flex-col gap-3 px-4 pt-0 pb-4">
-                            <Snapshot />
-                            <Engagement />
-                            <Glucose />
-                            <EA1C />
-                            <Nutrition />
-                          </div>
-                        </ScrollArea.Viewport>
-                        <ScrollArea.Scrollbar
-                          className="flex select-none touch-none p-0.5 bg-transparent transition-colors duration-[160ms] ease-out hover:bg-transparent data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
-                          orientation="vertical"
-                        >
-                          <ScrollArea.Thumb className="flex-1 bg-gray-300 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px] hover:bg-gray-400" />
-                        </ScrollArea.Scrollbar>
-                      </ScrollArea.Root>
-                    </TabsContent>
-                    <TabsContent value="secondary" className="h-full">
-                      <ScrollArea.Root className="h-full">
-                        <ScrollArea.Viewport className="h-full w-full">
-                          <div className="flex flex-col gap-3 px-4 pt-0 pb-4">
-                            <CarePlan />
-                            <MedicationChanges />
-                            <PreTwinMedications />
-                            <CurrentMedications />
-                            <Medication />
-                          </div>
-                        </ScrollArea.Viewport>
-                        <ScrollArea.Scrollbar
-                          className="flex select-none touch-none p-0.5 bg-transparent transition-colors duration-[160ms] ease-out hover:bg-transparent data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
-                          orientation="vertical"
-                        >
-                          <ScrollArea.Thumb className="flex-1 bg-gray-300 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px] hover:bg-gray-400" />
-                        </ScrollArea.Scrollbar>
-                      </ScrollArea.Root>
-                    </TabsContent>
+                  <div className="w-10 h-10 flex items-center justify-center">
+                    <button className="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-[#f6f6f6] transition-colors">
+                      <FilterIcon />
+                    </button>
                   </div>
-                </TabsShadcn>
-              </div>
+                </div>
+                <div className="flex-1 min-h-0">
+                  <TabsContent value="primary" className="h-full">
+                    <ScrollArea.Root className="h-full">
+                      <ScrollArea.Viewport className="h-full w-full">
+                        <div className="flex flex-col gap-3 px-4 pt-4 pb-4">
+                          <Snapshot />
+                          <Engagement />
+                          <Glucose />
+                          <EA1C />
+                          <Nutrition />
+                        </div>
+                      </ScrollArea.Viewport>
+                      <ScrollArea.Scrollbar
+                        className="flex select-none touch-none p-0.5 bg-transparent transition-colors duration-[160ms] ease-out hover:bg-transparent data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                        orientation="vertical"
+                      >
+                        <ScrollArea.Thumb className="flex-1 bg-gray-300 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px] hover:bg-gray-400" />
+                      </ScrollArea.Scrollbar>
+                    </ScrollArea.Root>
+                  </TabsContent>
+                  <TabsContent value="secondary" className="h-full">
+                    <ScrollArea.Root className="h-full">
+                      <ScrollArea.Viewport className="h-full w-full">
+                        <div className="flex flex-col gap-3 px-4 pt-4 pb-4">
+                          <CarePlan data={selectedMember.primaryData.carePlan} />
+                          <MedicationChanges data={selectedMember.primaryData.medicationChanges} />
+                          <PreTwinMedications data={selectedMember.secondaryData.preTwinMedications} />
+                          <CurrentMedications data={selectedMember.secondaryData.currentMedications} />
+                          <Medication data={selectedMember.secondaryData.medicationList} />
+                        </div>
+                      </ScrollArea.Viewport>
+                      <ScrollArea.Scrollbar
+                        className="flex select-none touch-none p-0.5 bg-transparent transition-colors duration-[160ms] ease-out hover:bg-transparent data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                        orientation="vertical"
+                      >
+                        <ScrollArea.Thumb className="flex-1 bg-gray-300 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px] hover:bg-gray-400" />
+                      </ScrollArea.Scrollbar>
+                    </ScrollArea.Root>
+                  </TabsContent>
+                </div>
+              </TabsShadcn>
             )}
           </div>
         </ResizablePanel>
