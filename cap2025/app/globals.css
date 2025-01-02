@@ -65,7 +65,7 @@
 
 @layer base {
   * {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Söhne', sans-serif;
   }
   body {
     @apply bg-background text-foreground;
