@@ -17,6 +17,7 @@ interface CarePlanProps {
     loseWeight: CarePlanMetric;
     eliminateMeds: CarePlanMetric;
   };
+  defaultOpen?: boolean;
 }
 
 function MetricRow({
@@ -71,9 +72,10 @@ export function CarePlan({
       target: 2,
     },
   },
+  defaultOpen = false,
 }: CarePlanProps) {
   return (
-    <Accordion.Root type="single" collapsible className="w-full">
+    <Accordion.Root type="single" defaultValue={defaultOpen ? "care-plan" : undefined} collapsible className="w-full">
       <Accordion.Item value="care-plan" className="border-0 flex w-full">
         <div className="h-fit p-3 bg-white rounded-[24px] data-[state=open]:rounded-2xl flex-col justify-start items-start gap-3 inline-flex w-full">
           <Accordion.Trigger className="hover:no-underline p-0 w-full group">

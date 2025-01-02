@@ -59,7 +59,6 @@ const tabs = [
   { id: 'chat', label: 'Chat' },
   { id: 'sensor', label: 'Sensor' },
   { id: 'communication', label: 'Communication' },
-  { id: 'care-plan', label: 'Care Plan' },
 ];
 
 export default function MembersPage() {
@@ -174,7 +173,6 @@ export default function MembersPage() {
               {selectedTab === 'chat' && <Chat messages={selectedMember.chat.messages} />}
               {selectedTab === 'sensor' && <Snapshot />}
               {selectedTab === 'communication' && <Engagement />}
-              {selectedTab === 'care-plan' && <CarePlan data={selectedMember.primaryData.carePlan} />}
             </div>
           </div>
         </ResizablePanel>
@@ -219,7 +217,7 @@ export default function MembersPage() {
                     <ScrollArea.Root className="h-full">
                       <ScrollArea.Viewport className="h-full w-full">
                         <div className="flex flex-col gap-3 px-4 pb-4">
-                          <Snapshot />
+                          <Snapshot defaultOpen={true} />
                           <Engagement />
                           <Glucose />
                           <EA1C />
@@ -238,7 +236,7 @@ export default function MembersPage() {
                     <ScrollArea.Root className="h-full">
                       <ScrollArea.Viewport className="h-full w-full">
                         <div className="flex flex-col gap-3 px-4 pb-4">
-                          <CarePlan data={selectedMember.primaryData.carePlan} />
+                          <CarePlan data={selectedMember.primaryData.carePlan} defaultOpen={true} />
                           <MedicationChanges data={selectedMember.primaryData.medicationChanges} />
                           <PreTwinMedications data={selectedMember.secondaryData.preTwinMedications} />
                           <CurrentMedications data={selectedMember.secondaryData.currentMedications} />

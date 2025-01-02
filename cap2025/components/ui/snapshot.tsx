@@ -24,6 +24,7 @@ interface SnapshotCardProps {
     adoption: number;
   };
   description?: string;
+  defaultOpen?: boolean;
 }
 
 function MetricBox({
@@ -69,9 +70,10 @@ export function Snapshot({
     adoption: 88,
   },
   description = "Sarah is struggling with her Dexcom app working with her phone. This is why she hasn't been wearing her sensor.\nOther adherence like logging, activity, weight, meds are all going great otherwise.\nHer sentiment is only brought down by the stress from her CGM issues.\nShe has a zendesk ticket to troubleshoot her phone.",
+  defaultOpen = false,
 }: SnapshotCardProps) {
   return (
-    <Accordion.Root type="single" collapsible className="w-full">
+    <Accordion.Root type="single" defaultValue={defaultOpen ? "snapshot" : undefined} className="w-full">
       <Accordion.Item value="snapshot" className="border-0 flex">
         <div className="h-fit p-3 bg-white rounded-[24px] data-[state=open]:rounded-2xl flex-col justify-start items-start gap-3 inline-flex w-full">
           <Accordion.Trigger className="hover:no-underline p-0 w-full group">
