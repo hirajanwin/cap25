@@ -97,7 +97,7 @@ export default function MembersPage() {
             {!isLeftCollapsed && (
               <div className="h-full border-r border-[#ebeef4] bg-[#f6f6f6] rounded-b-2xl">
                 <div className="flex flex-col h-full">
-                  <div className="p-4 bg-white border-b border-[#ebeef4]">
+                  <div className="px-4 py-2 bg-white border-b border-[#ebeef4]">
                     <SearchInput 
                       placeholder="Search members"
                       value={searchQuery}
@@ -106,7 +106,7 @@ export default function MembersPage() {
                   </div>
                   <ScrollArea.Root className="h-[calc(100%-80px)]">
                     <ScrollArea.Viewport className="h-full w-full">
-                      <div className="flex flex-col gap-3 px-4 pb-4">
+                      <div className="flex flex-col gap-3 px-4 pt-4 pb-4">
                         {[...Array(10)].map((_, index) => (
                           <TaskCard
                             key={index}
